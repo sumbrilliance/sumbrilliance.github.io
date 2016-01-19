@@ -1,0 +1,32 @@
+permalink: /:year/:month/:day/:title.html
+markdown: kramdown
+#pygments: true
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: 夏四
+  email: uyhhi1ss@gmail.com
+  link: http://sumbrilliance.com
+  github: http://github.com/sumbrilliance
+
+# 站点信息
+title: 夏四的博客 
+description: 夏四，iOS开发者
+url: http://sumbrilliance.com
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: assets/img/avatar.jpg
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# google analytics 设置
+ga:
+  id: UA-54767140-1
+  url: sumbrilliance.com
+
+# disqus 设置
+disqus:
+  shortname: sumbrilliance-zh
