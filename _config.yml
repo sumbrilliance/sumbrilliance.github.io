@@ -28,5 +28,6 @@ ga:
   url: sumbrilliance.com
 
 # disqus 设置
-disqus:
-  shortname: sumbrilliance-zh
+#disqus:
+#  shortname: sumbrilliance-zh
+
