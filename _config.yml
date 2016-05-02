@@ -1,33 +1,100 @@
-permalink: /:year/:month/:day/:title.html
+# Site settings
+title: 夏四的博客
+SEOTitle: 夏四的博客 | sumbrilliance Blog
+header-img: img/main-bg.jpg
+email: uyhhi1ss@gmail.com
+description: ""
+keyword: ""
+url: "http://sumbrilliance.com"              # your host, for absolute URL
+# baseurl: "/blog"         # for example, '/blog' if your blog hosted on 'host/blog'
+
+
+
+# SNS settings
+RSS: false
+# weibo_username:     huxpro
+# zhihu_username:     huxpro
+github_username:    sumbrilliance
+#twitter_username:  huxpro
+# facebook_username:  huxpro
+
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
-#pygments: true
-
 kramdown:
-  input: GFM
+  input: GFM                            # use Github Flavored Markdown !important
 
-# 作者信息
-author: 
-  name: 夏四
-  email: uyhhi1ss@gmail.com
-  link: http://sumbrilliance.com
-  github: http://github.com/sumbrilliance
 
-# 站点信息
-title: 夏四的博客 
-description: 夏四，iOS开发者
-url: http://sumbrilliance.com
-rss_url: /pages/atom.xml
 
-# avatar头像及Favicon
-avatar: http://7xqjl4.com1.z0.glb.clouddn.com/blog-avatar.jpg
-favicon: http://7xqjl4.com1.z0.glb.clouddn.com/blog-avatar.jpg
+# Disqus settings
+#disqus_username: _your_disqus_short_name_
 
-# google analytics 设置
-ga:
-  id: UA-54767140-1
-  url: sumbrilliance.com
+# Duoshuo settings
+duoshuo_username: sumbrilliance
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
-# disqus 设置
-#disqus:
-#  shortname: sumbrilliance-zh
 
+
+
+# Analytics settings
+# Baidu Analytics
+ba_track_id: e41bf98b73aa7bd8f63ae874738a9da1
+# Google Analytics
+ga_track_id: 'UA-77217069-1'            # Format: UA-xxxxxx-xx
+ga_domain: sumbrilliance.com
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "前端程序员"
+sidebar-avatar: /img/avatar-face.jpg   # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+friends: [
+    {
+        title: "Hux Blog",
+        href: "http://huangxuan.me"
+    # },{
+    #     title: "Foo",
+    #     href: "#"
+    # },{
+    #     title: "Bar",
+    #     href: "#"
+    # },{
+    #     title: "Example Friends",
+    #     href: "#"
+    # },{
+    #     title: "It helps SEO",
+    #     href: "#"
+    }
+]
