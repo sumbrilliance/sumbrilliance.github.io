@@ -13,10 +13,10 @@
 
 <meta property="og:description" content="夏四的博客">
 <meta property="og:type" content="website">
-<meta property="og:title" content="记录">
-<meta name="twitter:title" content="记录">
-<meta property="og:url" content="https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/">
-<meta property="twitter:url" content="https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/">
+<meta property="og:title" content="Nginx">
+<meta name="twitter:title" content="Nginx">
+<meta property="og:url" content="https://sumbrilliance.github.io/tags/nginx/">
+<meta property="twitter:url" content="https://sumbrilliance.github.io/tags/nginx/">
 <meta property="og:site_name" content="夏四的博客">
 <meta property="og:description" content="夏四的博客">
 <meta name="twitter:description" content="夏四的博客">
@@ -43,16 +43,16 @@
   <meta property="twitter:image" content="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg">
 
 
-    <title>记录</title>
+    <title>Nginx</title>
 
     <link rel="icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/index.xml">
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://sumbrilliance.github.io/tags/nginx/index.xml">
     
 
     
 
-    <link rel="canonical" href="https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/">
+    <link rel="canonical" href="https://sumbrilliance.github.io/tags/nginx/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -215,16 +215,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://sumbrilliance.github.io/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/">
-          使用 hugo 搭建github page 博客
+        <a class="link-unstyled" href="https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
+          docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-01-09T10:58:08-04:00">
+      <time itemprop="datePublished" datetime="2019-03-28T00:00:00Z">
         
-  January 9, 2019
+  March 28, 2019
 
       </time>
     
@@ -233,7 +233,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://sumbrilliance.github.io/categories/%e8%ae%b0%e5%bd%95">记录</a>
+      <a class="category-link" href="https://sumbrilliance.github.io/categories/docker">docker</a>
     
   
 
@@ -242,18 +242,22 @@
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
       
-        <p>之前使用的 jekyll 搭建的 github pages 博客，最近重新整理博客，决意迁移到 hugo。</p>
+        <p>本文通过一个简单的案例实践，描述了多容器多服务下如何对服务配置和关联。具体为</p>
 
-<p>本文介绍了这个博客迁移的过程。</p>
+<ol>
+<li>基于 beego实现的一个 http服务，使用 go官方镜像，打包成一个容器1</li>
+<li>通过 go 容器，将1中的服务，简单修改，克隆出第二个 http，打包成容器2</li>
+<li>使用 nginx 镜像，生成一个反向代理容器，代理到对上述两个容器服务</li>
+</ol>
       
       <p>
-        <a href="https://sumbrilliance.github.io/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="https://sumbrilliance.github.io/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/">
+    <a href="https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
       <div class="postShorten-thumbnailimg">
         <img alt="" itemprop="image" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/home-bg-o.jpg"/>
       </div>

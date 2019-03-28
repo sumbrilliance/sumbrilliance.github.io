@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 夏四的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://sumbrilliance.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Beego</title>
+      <link>https://sumbrilliance.github.io/tags/beego/</link>
+      <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://sumbrilliance.github.io/tags/beego/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Entitlements</title>
@@ -17,6 +26,15 @@
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>https://sumbrilliance.github.io/tags/entitlements/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>https://sumbrilliance.github.io/tags/go/</link>
+      <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://sumbrilliance.github.io/tags/go/</guid>
       <description></description>
     </item>
     
@@ -35,6 +53,15 @@
       <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
       
       <guid>https://sumbrilliance.github.io/tags/ios%E9%80%86%E5%90%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx</title>
+      <link>https://sumbrilliance.github.io/tags/nginx/</link>
+      <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://sumbrilliance.github.io/tags/nginx/</guid>
       <description></description>
     </item>
     
