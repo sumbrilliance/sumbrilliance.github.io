@@ -2,47 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 夏四的博客</title>
-    <link>https://sumbrilliance.github.io/categories/</link>
+    <link>https://summer4.dev/categories/</link>
     <description>Recent content in Categories on 夏四的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
+    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
     
-	<atom:link href="https://sumbrilliance.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://summer4.dev/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker</title>
-      <link>https://sumbrilliance.github.io/categories/docker/</link>
+      <link>https://summer4.dev/categories/docker/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/categories/docker/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://summer4.dev/categories/golang/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ios</title>
-      <link>https://sumbrilliance.github.io/categories/ios/</link>
+      <link>https://summer4.dev/categories/ios/</link>
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/categories/ios/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/ios/</guid>
       <description></description>
     </item>
     
     <item>
       <title>基础</title>
-      <link>https://sumbrilliance.github.io/categories/%E5%9F%BA%E7%A1%80/</link>
+      <link>https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/categories/%E5%9F%BA%E7%A1%80/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>笔记</title>
+      <link>https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/</guid>
       <description></description>
     </item>
     
     <item>
       <title>记录</title>
-      <link>https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/</link>
+      <link>https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Wed, 09 Jan 2019 10:58:08 -0400</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/categories/%E8%AE%B0%E5%BD%95/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/</guid>
       <description></description>
     </item>
     

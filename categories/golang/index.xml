@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on 夏四的博客</title>
+    <link>https://summer4.dev/categories/golang/</link>
+    <description>Recent content in Golang on 夏四的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
+    <lastBuildDate>Wed, 03 Oct 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://summer4.dev/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>go 包管理</title>
+      <link>https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;p&gt;golang 的包管理一直为人所诟病，从GOPATH到vendor再到vgo，都不太理想。于是出现了各种第三方的解决方案。最近发布的 1.11版本，官方推出了 go module，试图统一这种乱象，解决包管理方面的不足。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

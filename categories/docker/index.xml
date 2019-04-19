@@ -2,21 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on 夏四的博客</title>
-    <link>https://sumbrilliance.github.io/categories/docker/</link>
+    <link>https://summer4.dev/categories/docker/</link>
     <description>Recent content in Docker on 夏四的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
+    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
     <lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://sumbrilliance.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://summer4.dev/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</title>
-      <link>https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</link>
+      <link>https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</guid>
       <description>&lt;p&gt;本文通过一个简单的案例实践，描述了多容器多服务下如何对服务配置和关联。具体为&lt;/p&gt;
 
 &lt;ol&gt;

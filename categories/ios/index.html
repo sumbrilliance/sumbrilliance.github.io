@@ -1,641 +1,320 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.53" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ios | 夏四的博客</title>
+    <meta property="og:title" content="Ios - 夏四的博客">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="golang,杂谈,学习笔记,感悟,心得">
+    <meta name="description" content="Ios">
+        
+    <meta name="author" content="夏四">
+    <meta property="og:url" content="https://summer4.dev/categories/ios/">
+    <link rel="shortcut icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
     
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.3-SNAPSHOT">
-<meta name="author" content="sumbrilliance">
-<meta name="keywords" content="">
-<meta name="description" content="夏四的博客">
-
-
-<meta property="og:description" content="夏四的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ios">
-<meta name="twitter:title" content="Ios">
-<meta property="og:url" content="https://sumbrilliance.github.io/categories/ios/">
-<meta property="twitter:url" content="https://sumbrilliance.github.io/categories/ios/">
-<meta property="og:site_name" content="夏四的博客">
-<meta property="og:description" content="夏四的博客">
-<meta name="twitter:description" content="夏四的博客">
-<meta property="og:locale" content="en-us">
-
-
-<meta name="twitter:card" content="summary">
-
-  <meta name="twitter:site" content="@xgh_0803">
-
-
-  <meta name="twitter:creator" content="@xgh_0803">
-
-
-
-
-
-
-
-
-
-
-  <meta property="og:image" content="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg">
-  <meta property="twitter:image" content="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg">
-
-
-    <title>Ios</title>
-
-    <link rel="icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg">
-    
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://sumbrilliance.github.io/categories/ios/index.xml">
-    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="https://summer4.dev/categories/ios/index.xml" title="夏四的博客" />
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
 
-    <link rel="canonical" href="https://sumbrilliance.github.io/categories/ios/">
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
-    
-    <link rel="stylesheet" href="https://sumbrilliance.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
-    
-    
+</head>
 
-    
-      
-    
-    
-  </head>
 
-  <body>
-    <div id="blog">
-      <header id="header" data-behavior="1">
-  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-  <div class="header-title">
-    <a class="header-title-link" href="https://sumbrilliance.github.io/">夏四的博客</a>
-  </div>
-  
-    
-      <a class="header-right-picture "
-         href="https://sumbrilliance.github.io/#about">
-    
-    
-    
-      
-        <img class="header-picture" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" alt="Author&#39;s picture" />
-      
-    
-    </a>
-  
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://summer4.dev">
+                        夏四的博客
+                    </a>
+                
+                <p class="description">曾经的iOS开发、现Go语言(golang)程序员</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://summer4.dev">首页</a>
+                    
+                    <a  href="https://summer4.dev/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://summer4.dev/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
 </header>
 
-      <nav id="sidebar" data-behavior="1">
-  <div class="sidebar-container">
-    
-      <div class="sidebar-profile">
-        <a href="https://sumbrilliance.github.io/#about">
-          <img class="sidebar-profile-picture" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" alt="Author&#39;s picture" />
-        </a>
-        <h4 class="sidebar-profile-name">sumbrilliance</h4>
-        
-          <h5 class="sidebar-profile-bio">以工匠的态度写代码</h5>
-        
-      </div>
-    
-    <ul class="sidebar-buttons">
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">ios</span>
+                        中的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">entitlements授权机制</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2017年4月18日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://summer4.dev/categories/ios">iOS</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                <p>在对ipa重签名的时候，你可能会疑惑，为什么可以用别的证书重签之后，ipa就可以安装，又为什么在重签的时候需要加入 embedded.mobileprovision 文件，重签失败出现的闪退又是为什么。那么也许你需要深入了解 entitlements 的验证机制。</p>……
+                                <p class="readmore"><a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">一次视频直播客户端逆向开发</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2016年5月1日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://summer4.dev/categories/ios">iOS</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                <p>本文原计划是一个系列中的首篇，结果懒癌一犯，无限跳票，但是毕竟是废了心血写的，此次迁移，也做了保留，如果能对有些朋友有所参考，那就再好不过。</p>
+
+<p>本文介绍的主要是逆向的第一步，对想要逆向的ipa文件砸壳（去掉外层的加密保护）。</p>……
+                                <p class="readmore"><a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://summer4.dev/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">通过数据线直接ssh登陆到iOS设备</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2016年5月1日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://summer4.dev/categories/ios">iOS</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                <p>小黄书《iOS逆向工程》介绍的使用usb连接 iOS设备的方式是使用 usbmuxd，但是这个方式还是不够快速便捷，本文介绍了几种更方便的连接思路。</p>……
+                                <p class="readmore"><a href="https://summer4.dev/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
-  <li class="sidebar-button">
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://summer4.dev">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/">
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
     
-      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
-      
-      <span class="sidebar-button-desc">Home</span>
-    </a>
-  </li>
+    <li>
+        <a href="https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" title="使用 hugo 搭建github page 博客">使用 hugo 搭建github page 博客</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/" title="pem、 .p12、cer、pkcs 等文件的区别">pem、 .p12、cer、pkcs 等文件的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/" title="go 包管理">go 包管理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" title="entitlements授权机制">entitlements授权机制</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" title="一次视频直播客户端逆向开发">一次视频直播客户端逆向开发</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/" title="通过数据线直接ssh登陆到iOS设备">通过数据线直接ssh登陆到iOS设备</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/02/float-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/" title="float 在内存中的表示">float 在内存中的表示</a>
+    </li>
+    
+</ul>
+    </section>
 
-  <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/categories">
-    
-      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
-      
-      <span class="sidebar-button-desc">Categories</span>
-    </a>
-  </li>
 
-  <li class="sidebar-button">
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/tags">
+    <li>
+        <a href="https://summer4.dev/categories/docker/">docker(1)</a>
+    </li>
     
-      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
-      
-      <span class="sidebar-button-desc">Tags</span>
-    </a>
-  </li>
+    <li>
+        <a href="https://summer4.dev/categories/golang/">golang(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/ios/">ios(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/">基础(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/">笔记(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/">记录(1)</a>
+    </li>
+    
+</ul>
+    </section>
 
-  <li class="sidebar-button">
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/archives">
+    <a href="https://summer4.dev/tags/beego/">beego</a>
     
-      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
-      
-      <span class="sidebar-button-desc">Archives</span>
-    </a>
-  </li>
-
-  <li class="sidebar-button">
+    <a href="https://summer4.dev/tags/entitlements/">entitlements</a>
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/#about">
+    <a href="https://summer4.dev/tags/go/">go</a>
     
-      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
-      
-      <span class="sidebar-button-desc">About</span>
-    </a>
-  </li>
-
-
-    </ul>
-    <ul class="sidebar-buttons">
-      
-  <li class="sidebar-button">
+    <a href="https://summer4.dev/tags/ios/">ios</a>
     
-      <a class="sidebar-button-link " href="https://github.com/sumbrilliance" target="_blank" rel="noopener">
+    <a href="https://summer4.dev/tags/ios%E9%80%86%E5%90%91/">ios逆向</a>
     
-      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
-      
-      <span class="sidebar-button-desc">GitHub</span>
-    </a>
-  </li>
-
-
-    </ul>
-    <ul class="sidebar-buttons">
-      
-  <li class="sidebar-button">
+    <a href="https://summer4.dev/tags/modules/">modules</a>
     
-      <a class="sidebar-button-link " href="https://sumbrilliance.github.io/index.xml">
+    <a href="https://summer4.dev/tags/nginx/">nginx</a>
     
-      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
-      
-      <span class="sidebar-button-desc">RSS</span>
-    </a>
-  </li>
-
-
-    </ul>
-  </div>
-</nav>
-
-      
-        
-
-      
-      <div id="main" data-behavior="1"
-        class="
-               hasCoverMetaIn
-               ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
-  
+    <a href="https://summer4.dev/tags/%E5%85%B6%E4%BB%96/">其他</a>
     
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
+    <a href="https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/">包管理</a>
     
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://sumbrilliance.github.io/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">
-          entitlements授权机制
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
+    <a href="https://summer4.dev/tags/%E6%95%88%E7%8E%87/">效率</a>
     
-      <time itemprop="datePublished" datetime="2017-04-18T00:00:00Z">
-        
-  April 18, 2017
+    <a href="https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/">签名</a>
+    
+    <a href="https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/">证书</a>
+    
+    <a href="https://summer4.dev/tags/%E9%80%86%E5%90%91/">逆向</a>
+    
+    <a href="https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+    
+</div>
+    </section>
 
-      </time>
     
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://sumbrilliance.github.io/categories/ios">iOS</a>
-    
-  
 
-  </div>
-
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://summer4.dev/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
     </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        <p>在对ipa重签名的时候，你可能会疑惑，为什么可以用别的证书重签之后，ipa就可以安装，又为什么在重签的时候需要加入 embedded.mobileprovision 文件，重签失败出现的闪退又是为什么。那么也许你需要深入了解 entitlements 的验证机制。</p>
-      
-      <p>
-        <a href="https://sumbrilliance.github.io/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" class="postShorten-excerpt_link link">Continue reading</a>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://summer4.dev">夏四的博客 By 夏四</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         
-      </p>
     </div>
-  </div>
-  
-    <a href="https://sumbrilliance.github.io/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/about-bg.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://sumbrilliance.github.io/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">
-          一次视频直播客户端逆向开发
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2016-05-01T00:00:00Z">
-        
-  May 1, 2016
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://sumbrilliance.github.io/categories/ios">iOS</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        <p>本文原计划是一个系列中的首篇，结果懒癌一犯，无限跳票，但是毕竟是废了心血写的，此次迁移，也做了保留，如果能对有些朋友有所参考，那就再好不过。</p>
-
-<p>本文介绍的主要是逆向的第一步，对想要逆向的ipa文件砸壳（去掉外层的加密保护）。</p>
-      
-      <p>
-        <a href="https://sumbrilliance.github.io/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://sumbrilliance.github.io/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/post-bg-iOSRe-1.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-              
-  
-    
-      
-        
-          
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://sumbrilliance.github.io/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">
-          通过数据线直接ssh登陆到iOS设备
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2016-05-01T00:00:00Z">
-        
-  May 1, 2016
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://sumbrilliance.github.io/categories/ios">iOS</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        <p>小黄书《iOS逆向工程》介绍的使用usb连接 iOS设备的方式是使用 usbmuxd，但是这个方式还是不够快速便捷，本文介绍了几种更方便的连接思路。</p>
-      
-      <p>
-        <a href="https://sumbrilliance.github.io/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://sumbrilliance.github.io/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/post-bg-ssh-usb0.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-            
-
-          </section>
-        
-        <footer id="footer" class="main-content-wrap">
-  <span class="copyrights">
-    &copy; 2019 sumbrilliance. All Rights Reserved
-  </span>
 </footer>
 
-      </div>
-    </div>
-    
-    <div id="about">
-  <div id="about-card">
-    <div id="about-btn-close">
-      <i class="fa fa-remove"></i>
-    </div>
-    
-      <img id="about-card-picture" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" alt="Author&#39;s picture" />
-    
-    <h4 id="about-card-name">sumbrilliance</h4>
-    
-      <div id="about-card-bio">以工匠的态度写代码</div>
-    
-    
-      <div id="about-card-job">
-        <i class="fa fa-briefcase"></i>
-        <br/>
-        全栈程序员
-      </div>
-    
-    
-      <div id="about-card-location">
-        <i class="fa fa-map-marker"></i>
-        <br/>
-        GuangDong
-      </div>
-    
-  </div>
-</div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="Search" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center">no post found</div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">
-                <h3 class="media-heading">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>本文通过一个简单的案例实践，描述了多容器多服务下如何对服务配置和关联。具体为</p>
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
 
-<ol>
-<li>基于 beego实现的一个 http服务，使用 go官方镜像，打包成一个容器1</li>
-<li>通过 go 容器，将1中的服务，简单修改，克隆出第二个 http，打包成容器2</li>
-<li>使用 nginx 镜像，生成一个反向代理容器，代理到对上述两个容器服务</li>
-</ol></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/">
-                <h3 class="media-heading">使用 hugo 搭建github page 博客</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>之前使用的 jekyll 搭建的 github pages 博客，最近重新整理博客，决意迁移到 hugo。</p>
-
-<p>本文介绍了这个博客迁移的过程。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/">
-                <h3 class="media-heading">pem、 .p12、cer、pkcs 等文件的区别</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Dec 12, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>本文根据SO上面的一个的回答，对CSR 、pem、crt、cer等文件格式进行解释。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">
-                <h3 class="media-heading">entitlements授权机制</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>在对ipa重签名的时候，你可能会疑惑，为什么可以用别的证书重签之后，ipa就可以安装，又为什么在重签的时候需要加入 embedded.mobileprovision 文件，重签失败出现的闪退又是为什么。那么也许你需要深入了解 entitlements 的验证机制。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">
-                <h3 class="media-heading">一次视频直播客户端逆向开发</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2016
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>本文原计划是一个系列中的首篇，结果懒癌一犯，无限跳票，但是毕竟是废了心血写的，此次迁移，也做了保留，如果能对有些朋友有所参考，那就再好不过。</p>
-
-<p>本文介绍的主要是逆向的第一步，对想要逆向的ipa文件砸壳（去掉外层的加密保护）。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">
-                <h3 class="media-heading">通过数据线直接ssh登陆到iOS设备</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2016
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>小黄书《iOS逆向工程》介绍的使用usb连接 iOS设备的方式是使用 usbmuxd，但是这个方式还是不够快速便捷，本文介绍了几种更方便的连接思路。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://sumbrilliance.github.io/2016/02/float-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">
-                <h3 class="media-heading">float 在内存中的表示</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2016
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>从学c语言就一直都知道浮点数有单精度双精度，后者精度较高，使用64位存储，前者使用32位。然而没有进一步了解过。这次看计算机专业导论，介绍了浮点数的内部存储规则，总结记录一下.</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero="no post found"
-         data-message-one="1 post found"
-         data-message-other="{n} posts found">
-         7 posts found
-      </p>
-    </div>
-  </div>
-</div>
-    
-  
-    
-    <div id="cover" style="background-image:url('https://sumbrilliance.github.io/images/cover.jpg');"></div>
-  
-
-
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
-
-
-<script src="https://sumbrilliance.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
-
-
-<script lang="javascript">
-window.onload = updateMinWidth;
-window.onresize = updateMinWidth;
-document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
-function updateMinWidth() {
-  var sidebar = document.getElementById("sidebar");
-  var main = document.getElementById("main");
-  main.style.minWidth = "";
-  var w1 = getComputedStyle(main).getPropertyValue("min-width");
-  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
-  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
-  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138611423-1', 'auto');
+	
+	ga('send', 'pageview');
 }
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight > code, pre > code').each(function(i, block) {
-    if (!$(this).hasClass('codeblock')) {
-      $(this).addClass('codeblock');
-    }
-    hljs.highlightBlock(block);
-  });
-});
-</script>
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
 
 
-    
-  </body>
+</body>
 </html>
-

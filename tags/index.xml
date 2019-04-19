@@ -2,111 +2,140 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 夏四的博客</title>
-    <link>https://sumbrilliance.github.io/tags/</link>
+    <link>https://summer4.dev/tags/</link>
     <description>Recent content in Tags on 夏四的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
+    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
     <lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://sumbrilliance.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://summer4.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Beego</title>
-      <link>https://sumbrilliance.github.io/tags/beego/</link>
+      <link>https://summer4.dev/tags/beego/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/beego/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/beego/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Entitlements</title>
-      <link>https://sumbrilliance.github.io/tags/entitlements/</link>
+      <link>https://summer4.dev/tags/entitlements/</link>
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/entitlements/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/entitlements/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Go</title>
-      <link>https://sumbrilliance.github.io/tags/go/</link>
+      <link>https://summer4.dev/tags/go/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/go/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ios</title>
-      <link>https://sumbrilliance.github.io/tags/ios/</link>
+      <link>https://summer4.dev/tags/ios/</link>
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/ios/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/ios/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ios逆向</title>
-      <link>https://sumbrilliance.github.io/tags/ios%E9%80%86%E5%90%91/</link>
+      <link>https://summer4.dev/tags/ios%E9%80%86%E5%90%91/</link>
       <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/ios%E9%80%86%E5%90%91/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/ios%E9%80%86%E5%90%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Modules</title>
+      <link>https://summer4.dev/tags/modules/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/modules/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nginx</title>
-      <link>https://sumbrilliance.github.io/tags/nginx/</link>
+      <link>https://summer4.dev/tags/nginx/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/nginx/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/nginx/</guid>
       <description></description>
     </item>
     
     <item>
       <title>其他</title>
-      <link>https://sumbrilliance.github.io/tags/%E5%85%B6%E4%BB%96/</link>
+      <link>https://summer4.dev/tags/%E5%85%B6%E4%BB%96/</link>
       <pubDate>Wed, 09 Jan 2019 10:58:08 -0400</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/%E5%85%B6%E4%BB%96/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E5%85%B6%E4%BB%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>包管理</title>
+      <link>https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
       <description></description>
     </item>
     
     <item>
       <title>效率</title>
-      <link>https://sumbrilliance.github.io/tags/%E6%95%88%E7%8E%87/</link>
+      <link>https://summer4.dev/tags/%E6%95%88%E7%8E%87/</link>
       <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/%E6%95%88%E7%8E%87/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E6%95%88%E7%8E%87/</guid>
       <description></description>
     </item>
     
     <item>
       <title>签名</title>
-      <link>https://sumbrilliance.github.io/tags/%E7%AD%BE%E5%90%8D/</link>
+      <link>https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/</link>
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/%E7%AD%BE%E5%90%8D/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/</guid>
       <description></description>
     </item>
     
     <item>
       <title>证书</title>
-      <link>https://sumbrilliance.github.io/tags/%E8%AF%81%E4%B9%A6/</link>
+      <link>https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/%E8%AF%81%E4%B9%A6/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>逆向</title>
-      <link>https://sumbrilliance.github.io/tags/%E9%80%86%E5%90%91/</link>
+      <link>https://summer4.dev/tags/%E9%80%86%E5%90%91/</link>
       <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://sumbrilliance.github.io/tags/%E9%80%86%E5%90%91/</guid>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E9%80%86%E5%90%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>项目管理</title>
+      <link>https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/</guid>
       <description></description>
     </item>
     
