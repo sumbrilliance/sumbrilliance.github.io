@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://summer4.dev/about/</loc>
     <lastmod>2019-04-17T00:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/</loc>
+    <lastmod>2019-04-03T00:00:00+08:00</lastmod>
   </url>
   
   <url>
@@ -71,6 +81,12 @@
   </url>
   
   <url>
+    <loc>https://summer4.dev/tags/fabric-%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B/</loc>
+    <lastmod>2019-04-03T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://summer4.dev/tags/go/</loc>
     <lastmod>2019-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -79,6 +95,12 @@
   <url>
     <loc>https://summer4.dev/categories/golang/</loc>
     <lastmod>2018-10-03T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/categories/hyperledger-fabric/</loc>
+    <lastmod>2019-04-03T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -114,13 +136,19 @@
   
   <url>
     <loc>https://summer4.dev/posts/</loc>
-    <lastmod>2019-03-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://summer4.dev/tags/</loc>
     <lastmod>2019-03-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -137,6 +165,18 @@
   </url>
   
   <url>
+    <loc>https://summer4.dev/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2018-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -144,7 +184,13 @@
   
   <url>
     <loc>https://summer4.dev/</loc>
-    <lastmod>2019-04-17T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-20T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/tags/%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2019-04-03T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>区块链 on 夏四的博客</title>
+    <link>https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <description>Recent content in 区块链 on 夏四的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
+    <lastBuildDate>Sat, 20 Apr 2019 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raft 算法理解和总结</title>
+      <link>https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sat, 20 Apr 2019 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;Hyperledger fabric 自1.4.1版本开始支持了 Raft 共识，比原先的生产环境推荐共识&amp;rdquo;kafka&amp;rdquo;，搭建的复杂度和可维护性上要好不少，并且 1.4.0 是 Hyperledger的第一个长期维护版本(long term support)，推荐在生产环境中使用，完全可以升级并使用Raft共识。&lt;/p&gt;
+
+&lt;p&gt;本文介绍总结Raft 算法，主要是根据著名的 &lt;a href=&#34;http://thesecretlivesofdata.com/raft/&#34;&gt;Raft讲解动画&lt;/a&gt;的理解，并进行文字化的总结。强烈推荐这个讲解动画，可配合动画阅读下文，更容易理解。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>fabric 主要模块和概念介绍和详细交易流程</title>
+      <link>https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Wed, 03 Apr 2019 00:00:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/</guid>
+      <description>&lt;p&gt;本文将总结Hyperledger fabric 的主要模块、概念，以及详细的交易流程。以下总结基于 Hyperledger fabric 1.2版本。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

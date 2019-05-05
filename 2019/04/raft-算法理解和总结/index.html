@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.53" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Raft 算法理解和总结 | 夏四的博客</title>
+    <meta property="og:title" content="Raft 算法理解和总结 - 夏四的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-20T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-20T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="golang,杂谈,学习笔记,感悟,心得">
+    <meta name="description" content="Raft 算法理解和总结">
+        
+    <meta name="author" content="夏四">
+    <meta property="og:url" content="https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/">
+    <link rel="shortcut icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://summer4.dev">
+                        夏四的博客
+                    </a>
+                
+                <p class="description">曾经的iOS开发、现Go语言(golang)程序员</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://summer4.dev">首页</a>
+                    
+                    <a  href="https://summer4.dev/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://summer4.dev/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Raft 算法理解和总结</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月20日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE">区块链</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <p>Hyperledger fabric 自1.4.1版本开始支持了 Raft 共识，比原先的生产环境推荐共识&rdquo;kafka&rdquo;，搭建的复杂度和可维护性上要好不少，并且 1.4.0 是 Hyperledger的第一个长期维护版本(long term support)，推荐在生产环境中使用，完全可以升级并使用Raft共识。</p>
+
+<p>本文介绍总结Raft 算法，主要是根据著名的 <a href="http://thesecretlivesofdata.com/raft/">Raft讲解动画</a>的理解，并进行文字化的总结。强烈推荐这个讲解动画，可配合动画阅读下文，更容易理解。</p>
+
+<h1 id="概念">概念</h1>
+
+<h2 id="raft-算法中的三种角色">Raft 算法中的三种角色：</h2>
+
+<ul>
+<li><p>follower 追随者，普通节点默认都是follower</p></li>
+
+<li><p>candidate 候选人，当准备发起新一轮选举的时候，由follower升级而成，选举完成会变回follower或成为leader</p></li>
+
+<li><p>leader 领导者，即候选人被选中上，成为主节点</p></li>
+</ul>
+
+<h2 id="raft-算法中的两种超时">Raft 算法中的两种超时</h2>
+
+<h3 id="election-timeout-选举超时">election timeout - 选举超时</h3>
+
+<p>选举超时，即 follower 等待成为 candidate 的超时时间，一般在 130ms~300ms 之间。</p>
+
+<p>在follower 开始倒计时 election tomeout 时间后，开始成为candidate，并且发起一次选举过程。</p>
+
+<h3 id="heartbeat-timeout-心跳超时">heartbeat timeout - 心跳超时</h3>
+
+<p>leader 会在heartbeat timeout 后发送心跳包，这也就是leader发送心跳包的时间间隔。</p>
+
+<h1 id="流程">流程</h1>
+
+<h2 id="同步数据的过程">同步数据的过程</h2>
+
+<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/04/Raft-log-replication.gif" alt="图示" />
+这个过程叫做日志复制(Log replication)</p>
+
+<ol>
+<li>client 向系统发送(会导向leader节点)更改消息</li>
+<li>leader 预修改数据，但不commit（未确认修改）</li>
+<li>leader 向follower，发送修改消息</li>
+<li>follower 回复 ack，并且预修改这个消息，但不commit</li>
+<li>leader收到这个ack之后，首先进行commit(确认修改)，并且发给client</li>
+<li>leader 向 follower发送心跳包，携带leader已commit这个消息</li>
+<li>follower收到leader的已commit消息，知道leader已经commit了，那么自己也进行commit</li>
+</ol>
+
+<h2 id="开始选举的过程">开始选举的过程</h2>
+
+<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/04/Raft-election.gif" alt="election" /></p>
+
+<ol>
+<li>candidate首先给自己投一票，然后发送消息给其他节点，请求其他节点的选票</li>
+</ol>
+
+<p>如果这时候，这些 follower 节点还没在这轮选举中投过票，那么会投这个 candidate,然后重置自己的 election timeout。上文提到follower 在倒计时election timeout后发起新一轮选举，那么这时因为重置了 election timeout，所以是不会发起选举的，维持了节点的follower特性。</p>
+
+<ol>
+<li><p>candidate 收到足够的选票，成为 leader</p></li>
+
+<li><p>leader 发送心跳包</p></li>
+</ol>
+
+<p>leader 会在每间隔 header timeout 给每个folloer发送一个心跳包，称为<em>Append Entries</em></p>
+
+<p>只要follower能收到心跳包，则维持这次的选举结果（重置election timeout?），继续当一个follower</p>
+
+<h1 id="异常情况的处理">异常情况的处理</h1>
+
+<h2 id="同时成为candidate-导致分裂选举的情况">同时成为candidate，导致分裂选举的情况</h2>
+
+<p>因为 election timeout 是各自在 150~300 随机的，出现同时达到的情况概率较低，但仍有可能。</p>
+
+<ol>
+<li>两个 follower 同时达到 election timeout，同时成为 candidate</li>
+<li>两个 candidate 各自给自己投一票，并且同时发送选举请求给其他的follower</li>
+<li>因为其他 follower 只对这轮选举投一个，所以，如果有两个follower（或者说偶数），则可能出现，每个candidate收到一个follower（或者说收到的选票相等），那么选举无法完成。</li>
+<li>选举无法完成，两个 candidate 再间隔一段时间后（election timeout重新随机了一次，再次同时的概率更低了），继续发起新一轮的选举。</li>
+<li>如果这次没有再出现两个人收到的选票一样的情况，那么，选票多的candidate当选leader</li>
+<li>完成选举后，会对同步leader的数据给follower</li>
+</ol>
+
+<p>如图所示：<img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/04/Raft-double-election.gif" alt="doubleElection" /></p>
+
+<h2 id="出现网络分区时怎么做">出现网络分区时怎么做？</h2>
+
+<p>异常情况出现了，假设存在五个节点，node A~E，B是leader，这时候因为网络分区，node A和B可互通信，但其他节点已经联系不上AB节点，那么就会出现两个分区，一边三个节点，一边两个节点。如图所示：</p>
+
+<p>这时 CDE 节点没有leader，会发起新的选举，直到从中选中新的leader。他们的选举轮数肯定是递增的（比AB的大）。</p>
+
+<ul>
+<li>如果客户端访问到的是 AB的分区，那么按如下流程：</li>
+</ul>
+
+<ol>
+<li>leader(B) 把数据发给 folloer （A）</li>
+<li>A 接受到数据，数据处于未提交状态，并发个ack给leader（node B）</li>
+<li>B 只收到了一个回复，远远小于选举时的节点数（4个follower），通知A不要commit</li>
+</ol>
+
+<p>AB的数据一直属于未提交状态(uncommited)。</p>
+
+<ul>
+<li>如果客户端访问到的是CDE的分区，那么按如下流程：</li>
+</ul>
+
+<p>1.leader 把 数据发给 follower们</p>
+
+<p>2.follower 收到并回复 ack</p>
+
+<p>3.leader 收到大多数follower的ack，决定更新数据，并告知follower们也更新数据</p>
+
+<p>这时候，如果网络故障修复，消除了网络分区，那么因为 CDE节点所在的分区，选举轮数(term)比较大，所以AB所在分区会回滚掉中断之后的修改，而是以CDE分区的数据为准。并且以 CDE 的leader 为统一的leader</p>
+
+<h2 id="如何保证leader的数据是最新的呢">如何保证leader的数据是最新的呢？</h2>
+
+<p>因为 candidate 当选leader后，会让底下的follower同步他的数据，那么就必须保证他的数据是最新的。Raft 通过如下机制保证 candidate 的数据是最新的：</p>
+
+<p>candidate 在发送 RequestVote 请求follower 给自己投票的时候，把自己当前最新的log 的index 和 term（选举的轮数）发给 follower，follower收到后如果发现自己本地的数据比candidate还新，那么拒绝投票。</p>
+
+<p>比较新旧的依据是， term 大的比term小的数据更新，如果 term一样，则 log index大的数据更新。</p>
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/about/">关于我</a></li>
+        
+        <li><a href="/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/">fabric 主要模块和概念介绍和详细交易流程</a></li>
+        
+        <li><a href="/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a></li>
+        
+        <li><a href="/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/">使用 hugo 搭建github page 博客</a></li>
+        
+        <li><a href="/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/">pem、 .p12、cer、pkcs 等文件的区别</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://summer4.dev/tags/%E5%8C%BA%E5%9D%97%E9%93%BE">区块链</a></li>
+                                
+                                <li><a href="https://summer4.dev/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95">共识算法</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "sumbrilliance/sumbrilliance.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://summer4.dev">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/" title="Raft 算法理解和总结">Raft 算法理解和总结</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/" title="fabric 主要模块和概念介绍和详细交易流程">fabric 主要模块和概念介绍和详细交易流程</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" title="使用 hugo 搭建github page 博客">使用 hugo 搭建github page 博客</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/" title="pem、 .p12、cer、pkcs 等文件的区别">pem、 .p12、cer、pkcs 等文件的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/" title="go 包管理">go 包管理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" title="entitlements授权机制">entitlements授权机制</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" title="一次视频直播客户端逆向开发">一次视频直播客户端逆向开发</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/" title="通过数据线直接ssh登陆到iOS设备">通过数据线直接ssh登陆到iOS设备</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/02/float-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/" title="float 在内存中的表示">float 在内存中的表示</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://summer4.dev/categories/docker/">docker(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/golang/">golang(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/hyperledger-fabric/">hyperledger-fabric(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/ios/">ios(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/">基础(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/">笔记(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/">记录(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://summer4.dev/tags/beego/">beego</a>
+    
+    <a href="https://summer4.dev/tags/entitlements/">entitlements</a>
+    
+    <a href="https://summer4.dev/tags/fabric-%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B/">fabric-记账流程</a>
+    
+    <a href="https://summer4.dev/tags/go/">go</a>
+    
+    <a href="https://summer4.dev/tags/ios/">ios</a>
+    
+    <a href="https://summer4.dev/tags/ios%E9%80%86%E5%90%91/">ios逆向</a>
+    
+    <a href="https://summer4.dev/tags/modules/">modules</a>
+    
+    <a href="https://summer4.dev/tags/nginx/">nginx</a>
+    
+    <a href="https://summer4.dev/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/">共识算法</a>
+    
+    <a href="https://summer4.dev/tags/%E5%85%B6%E4%BB%96/">其他</a>
+    
+    <a href="https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/">包管理</a>
+    
+    <a href="https://summer4.dev/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    
+    <a href="https://summer4.dev/tags/%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86/">学习整理</a>
+    
+    <a href="https://summer4.dev/tags/%E6%95%88%E7%8E%87/">效率</a>
+    
+    <a href="https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/">签名</a>
+    
+    <a href="https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/">证书</a>
+    
+    <a href="https://summer4.dev/tags/%E9%80%86%E5%90%91/">逆向</a>
+    
+    <a href="https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://summer4.dev/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://summer4.dev">夏四的博客 By 夏四</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138611423-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>
