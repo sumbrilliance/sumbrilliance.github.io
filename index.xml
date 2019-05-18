@@ -8,10 +8,19 @@
     <language>zh-CN</language>
     <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
     <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
-    <lastBuildDate>Sat, 20 Apr 2019 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 18 May 2019 16:42:00 +0800</lastBuildDate>
     
 	<atom:link href="https://summer4.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用go调用eth踩坑笔记</title>
+      <link>https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 18 May 2019 16:42:00 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;项目中使用 go-ethereum 相关接口与以太坊网络进行交互，本文整理了中间遇到的一些坑，方便后来人对应来排错。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Raft 算法理解和总结</title>
@@ -31,7 +40,7 @@
       <author>uyhhi1ss@gmail.com (夏四)</author>
       <guid>https://summer4.dev/about/</guid>
       <description>欢迎来到我的博客~ 半路出家打杂程序员，曾做过iOS开发，PHP开发，非主业语言包括JAVA，python，C++，javascript。目前从事golang开发。
-原博客域名为 https://sumbrilliance.com，现已经(2019-03-01)迁移到目前域名下，原域名不再维护。
+原博客域名为 https://sumbrilliance.com 现已经(2019-03-01)迁移到目前域名下，原域名不再维护。
 个人邮箱：uyhhi1ss@gmail.com
 此博客模板来源于此github项目，采用现有模板节省了我大量的精力，使得我可以专注于撰写博文，在此对原作者表示感谢。</description>
     </item>
