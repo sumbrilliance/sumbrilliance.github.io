@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,14 +21,14 @@
         
     <meta name="author" content="夏四">
     <meta property="og:url" content="https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/">
-    <link rel="shortcut icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
         <link rel="stylesheet" href="/css/prism.css">
     
     <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
 
@@ -47,7 +47,7 @@
                         夏四的博客
                     </a>
                 
-                <p class="description">曾经的iOS开发、现Go语言(golang)程序员</p>
+                <p class="description">打杂开发/Go语言(golang)程序员</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -65,38 +65,9 @@
 
 
 <div id="body">
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">go 包管理</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2018年10月3日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://summer4.dev/categories/golang">golang</a></span>
-                            
-                                <span class="meta-category"><a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0">笔记</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="clear">
-                            <div class="toc-article">
-                                <div class="toc-title">文章目录</div>
-                                <nav id="TableOfContents">
+        
+        <div id="virtual_toc_list" style="display: none">
+            <nav id="TableOfContents">
 <ul>
 <li><a href="#go-modules-是什么">go modules 是什么</a></li>
 <li><a href="#为什么使用-go-modules">为什么使用 go modules</a>
@@ -132,6 +103,137 @@
 </ul></li>
 </ul>
 </nav>
+        </div>
+        <div id="float_toc_div" style="margin: 10px;border: 1px solid gray;z-index:99999;display: none;">
+            <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                <strong id="toc_btn_open" style="color: black;font-size: large;">目录</strong>
+                <strong id="toc_btn_close" style="color: black;font-size: large;float: right">╳</strong>
+            </header>
+            <div id="toc_list" style="background-color: #f3f3f3;color: black;padding: 10px;">
+        
+            </div>
+        </div>
+        <style type="text/css">
+            #float_toc_div {
+                position: fixed;
+                display: none;
+                 
+                height: auto;
+                font-size: 13px;
+            }
+        
+            #toc_list a:hover,
+            #toc_list a:active {
+                color: #ba3925;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                let tocNavElem = document.getElementById("TableOfContents");
+                let floatTocDivElem = document.getElementById("float_toc_div");
+                let tocListElem = floatTocDivElem.getElementsByTagName('div')[0];
+                let colGroupElem = document.getElementById("body").getElementsByClassName("col-group")[0]
+                let floatTocWidth = (document.body.clientWidth - colGroupElem.offsetWidth) / 2 - 16;
+                var useFloatToc = false;
+
+                if (floatTocWidth >= 100) {
+                    useFloatToc = true;
+                    document.getElementById("toc_list").appendChild(tocNavElem);
+                    floatTocDivElem.style.display = 'block';
+                    floatTocDivElem.style.width = floatTocWidth + 'px';
+                    top();
+                    floatTocDivElem.style.left = '0px';
+
+                    function top() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.top = window.innerHeight / 9 + 'px';
+                        }
+                    }
+
+                    function ishide() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.display = 'block';
+                        }
+                    }
+
+                    window.onscroll = function () {
+                        ishide();
+                        if ((document.documentElement.scrollTop != 0) && (floatTocDivElem.style.display == 'block')) {
+                            top();
+                        }
+                    };
+
+                    window.onresize = function () {
+                        ishide();
+                    }
+
+                    document.getElementById("toc_btn_open").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "none":
+                                document.getElementById("toc_btn_close").style.display = "";
+                                tocListElem.style.display = "";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "1px solid gray";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+
+                    document.getElementById("toc_btn_close").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "":
+                                document.getElementById("toc_btn_close").style.display = "none";
+                                tocListElem.style.display = "none";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+                } else {
+                    let fixedTocElem = document.getElementsByClassName("toc-article")[0];
+                    fixedTocElem.appendChild(tocNavElem);
+                    fixedTocElem.parentElement.style.display = "";
+                }
+                document.getElementById("virtual_toc_list").remove();
+            };   
+        </script>
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">go 包管理</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年10月3日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://summer4.dev/categories/golang">golang</a></span>
+                            
+                                <span class="meta-category"><a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0">笔记</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="clear" style="display: none">
+                            <div class="toc-article">
+                                <div class="toc-title">文章目录</div>
                             </div>
                         </div>
                         
@@ -306,12 +408,12 @@ example.com/server/common/pub.git v1.0.0
 <p>并不是所有的包都是https的，如果公司内部的包实用的http，但go 官方并不打算支持http的包下载。那么可通过配合修改git配置来解决。</p>
 
 <ul>
-<li>修改 .gitconfig 文件</li>
-</ul>
+<li><p>修改 .gitconfig 文件</p>
 
 <pre><code>[url &quot;git@insecure-git.com:&quot;]
-    insteadOf = http://insecure-git.com/
-</code></pre>
+insteadOf = http://insecure-git.com/
+</code></pre></li>
+</ul>
 
 <p>另外还有一种使用场景，如果需要返回的输入</p>
                         </div>
@@ -327,13 +429,13 @@ example.com/server/common/pub.git v1.0.0
         
         <li><a href="/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">entitlements授权机制</a></li>
         
-        <li><a href="/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">通过数据线直接ssh登陆到iOS设备</a></li>
-        
         <li><a href="/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">一次视频直播客户端逆向开发</a></li>
+        
+        <li><a href="/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/">通过数据线直接ssh登陆到iOS设备</a></li>
         
         <li><a href="/2016/02/float-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">float 在内存中的表示</a></li>
         
-        <li><a href="/other/">归档</a></li>
+        <li><a href="/archives/">归档</a></li>
         
     </ul>
 </div>
@@ -549,21 +651,23 @@ example.com/server/common/pub.git v1.0.0
 </footer>
 
 
-    <script type="text/javascript">
     
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
 
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
     </script>
     <script type="text/javascript" src="/js/prism.js" async="true"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
@@ -581,7 +685,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 

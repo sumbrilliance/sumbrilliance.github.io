@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,14 +21,14 @@
         
     <meta name="author" content="夏四">
     <meta property="og:url" content="https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/">
-    <link rel="shortcut icon" href="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/avatar-face.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
         <link rel="stylesheet" href="/css/prism.css">
     
     <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
 
@@ -47,7 +47,7 @@
                         夏四的博客
                     </a>
                 
-                <p class="description">曾经的iOS开发、现Go语言(golang)程序员</p>
+                <p class="description">打杂开发/Go语言(golang)程序员</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -65,6 +65,131 @@
 
 
 <div id="body">
+        
+        <div id="virtual_toc_list" style="display: none">
+            <nav id="TableOfContents">
+<ul>
+<li><a href="#fabric-中的主要模块">fabric 中的主要模块</a>
+<ul>
+<li><a href="#fabric-中的各名词概念解释">fabric 中的各名词概念解释</a></li>
+<li><a href="#其他概念">其他概念</a>
+<ul>
+<li><a href="#成员管理">成员管理</a></li>
+<li><a href="#账本管理">账本管理</a></li>
+<li><a href="#交易管理">交易管理</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#交易流程">交易流程</a>
+<ul>
+<li><a href="#1-客户端发起交易提案-到peer节点">1. 客户端发起交易提案，到peer节点</a></li>
+<li><a href="#2-peer节点收到提案-进行模拟交易-并将模拟结果返回客户端">2. peer节点收到提案，进行模拟交易，并将模拟结果返回客户端</a></li>
+<li><a href="#3-客户端收到模拟结果-如果成功-则提交给-orderer-节点">3. 客户端收到模拟结果，如果成功，则提交给 orderer 节点</a></li>
+<li><a href="#4-orderer节点对交易进行打包">4. orderer节点对交易进行打包</a></li>
+<li><a href="#5-打包完成-写入区块-然后将数据发给-组织主节点">5. 打包完成，写入区块，然后将数据发给 组织主节点</a></li>
+<li><a href="#6-组织间节点进行数据同步-gossip">6. 组织间节点进行数据同步（gossip）</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        <div id="float_toc_div" style="margin: 10px;border: 1px solid gray;z-index:99999;display: none;">
+            <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                <strong id="toc_btn_open" style="color: black;font-size: large;">目录</strong>
+                <strong id="toc_btn_close" style="color: black;font-size: large;float: right">╳</strong>
+            </header>
+            <div id="toc_list" style="background-color: #f3f3f3;color: black;padding: 10px;">
+        
+            </div>
+        </div>
+        <style type="text/css">
+            #float_toc_div {
+                position: fixed;
+                display: none;
+                 
+                height: auto;
+                font-size: 13px;
+            }
+        
+            #toc_list a:hover,
+            #toc_list a:active {
+                color: #ba3925;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                let tocNavElem = document.getElementById("TableOfContents");
+                let floatTocDivElem = document.getElementById("float_toc_div");
+                let tocListElem = floatTocDivElem.getElementsByTagName('div')[0];
+                let colGroupElem = document.getElementById("body").getElementsByClassName("col-group")[0]
+                let floatTocWidth = (document.body.clientWidth - colGroupElem.offsetWidth) / 2 - 16;
+                var useFloatToc = false;
+
+                if (floatTocWidth >= 100) {
+                    useFloatToc = true;
+                    document.getElementById("toc_list").appendChild(tocNavElem);
+                    floatTocDivElem.style.display = 'block';
+                    floatTocDivElem.style.width = floatTocWidth + 'px';
+                    top();
+                    floatTocDivElem.style.left = '0px';
+
+                    function top() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.top = window.innerHeight / 9 + 'px';
+                        }
+                    }
+
+                    function ishide() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.display = 'block';
+                        }
+                    }
+
+                    window.onscroll = function () {
+                        ishide();
+                        if ((document.documentElement.scrollTop != 0) && (floatTocDivElem.style.display == 'block')) {
+                            top();
+                        }
+                    };
+
+                    window.onresize = function () {
+                        ishide();
+                    }
+
+                    document.getElementById("toc_btn_open").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "none":
+                                document.getElementById("toc_btn_close").style.display = "";
+                                tocListElem.style.display = "";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "1px solid gray";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+
+                    document.getElementById("toc_btn_close").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "":
+                                document.getElementById("toc_btn_close").style.display = "none";
+                                tocListElem.style.display = "none";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+                } else {
+                    let fixedTocElem = document.getElementsByClassName("toc-article")[0];
+                    fixedTocElem.appendChild(tocNavElem);
+                    fixedTocElem.parentElement.style.display = "";
+                }
+                document.getElementById("virtual_toc_list").remove();
+            };   
+        </script>
+        
     <div class="container">
         <div class="col-group">
 
@@ -93,32 +218,9 @@
                         </div>
                         
                         
-                        <div class="clear">
+                        <div class="clear" style="display: none">
                             <div class="toc-article">
                                 <div class="toc-title">文章目录</div>
-                                <nav id="TableOfContents">
-<ul>
-<li><a href="#fabric-中的主要模块">fabric 中的主要模块</a>
-<ul>
-<li><a href="#fabric-中的各名词概念解释">fabric 中的各名词概念解释</a></li>
-<li><a href="#其他概念">其他概念</a>
-<ul>
-<li><a href="#成员管理">成员管理</a></li>
-<li><a href="#账本管理">账本管理</a></li>
-<li><a href="#交易管理">交易管理</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#交易流程">交易流程</a>
-<ul>
-<li><a href="#1-客户端发起交易提案-到peer节点">1. 客户端发起交易提案，到peer节点</a></li>
-<li><a href="#2-peer节点收到提案-进行模拟交易-并将模拟结果返回客户端">2. peer节点收到提案，进行模拟交易，并将模拟结果返回客户端</a></li>
-<li><a href="#3-客户端收到模拟结果-如果成功-则提交给-orderer-节点">3. 客户端收到模拟结果，如果成功，则提交给 orderer 节点</a></li>
-<li><a href="#4-orderer节点对交易进行打包">4. orderer节点对交易进行打包</a></li>
-<li><a href="#5-打包完成-写入区块-然后将数据发给-组织主节点">5. 打包完成，写入区块，然后将数据发给 组织主节点</a></li>
-<li><a href="#6-组织间节点进行数据同步-gossip">6. 组织间节点进行数据同步（gossip）</a></li>
-</ul></li>
-</ul>
-</nav>
                             </div>
                         </div>
                         
@@ -551,21 +653,23 @@
 </footer>
 
 
-    <script type="text/javascript">
     
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
 
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
     </script>
     <script type="text/javascript" src="/js/prism.js" async="true"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
@@ -583,7 +687,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
