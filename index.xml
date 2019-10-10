@@ -8,10 +8,23 @@
     <language>zh-CN</language>
     <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
     <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
-    <lastBuildDate>Sat, 18 May 2019 16:42:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Oct 2019 21:51:01 +0800</lastBuildDate>
     
 	<atom:link href="https://summer4.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>(译)为什么要使用 Go 模块代理</title>
+      <link>https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Thu, 10 Oct 2019 21:51:01 +0800</pubDate>
+      <author>uyhhi1ss@gmail.com (夏四)</author>
+      <guid>https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/</guid>
+      <description>&lt;p&gt;引入Go模块之后，我以为这就是最终解决方案了。我很快意识到事实并非如此。最近，大家开始提倡使用Go模块代理。在研究了利弊之后，我得出结论，这是近年来&lt;strong&gt;最重要的变化&lt;/strong&gt;之一。何处此言？是什么使Go模块代理如此特别？&lt;/p&gt;
+
+&lt;p&gt;在Go模块中，如果你添加了新的依赖项或者在没有缓存过的新机器上构建Go模块，则它将（&lt;code&gt;go get&lt;/code&gt;）下载&lt;code&gt;go.mod&lt;/code&gt;中的所有依赖项，并将其缓存以用于进一步的操作。可以通过使用&lt;code&gt;vendor/&lt;/code&gt;文件夹并编译时携带&lt;code&gt;-mod=vendor&lt;/code&gt;参数来绕过缓存（以及下载依赖项）。&lt;/p&gt;
+
+&lt;p&gt;但是这两种方法都不甚完美，我们有更好的方案。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>使用go调用eth踩坑笔记</title>

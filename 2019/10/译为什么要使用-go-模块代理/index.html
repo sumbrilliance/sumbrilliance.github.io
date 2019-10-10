@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>(译)为什么要使用 Go 模块代理 | 夏四的博客</title>
+    <meta property="og:title" content="(译)为什么要使用 Go 模块代理 - 夏四的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-10-10T21:51:01&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-10-10T21:51:01&#43;08:00">
+        
+    <meta name="Keywords" content="golang,杂谈,学习笔记,感悟,心得">
+    <meta name="description" content="(译)为什么要使用 Go 模块代理">
+        
+    <meta name="author" content="夏四">
+    <meta property="og:url" content="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://summer4.dev">
+                        夏四的博客
+                    </a>
+                
+                <p class="description">打杂开发/Go语言(golang)程序员</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://summer4.dev">首页</a>
+                    
+                    <a  href="https://summer4.dev/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://summer4.dev/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">(译)为什么要使用 Go 模块代理</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年10月10日
+                        </date>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <p>引入Go模块之后，我以为这就是最终解决方案了。我很快意识到事实并非如此。最近，大家开始提倡使用Go模块代理。在研究了利弊之后，我得出结论，这是近年来<strong>最重要的变化</strong>之一。何处此言？是什么使Go模块代理如此特别？</p>
+
+<p>在Go模块中，如果你添加了新的依赖项或者在没有缓存过的新机器上构建Go模块，则它将（<code>go get</code>）下载<code>go.mod</code>中的所有依赖项，并将其缓存以用于进一步的操作。可以通过使用<code>vendor/</code>文件夹并编译时携带<code>-mod=vendor</code>参数来绕过缓存（以及下载依赖项）。</p>
+
+<p>但是这两种方法都不甚完美，我们有更好的方案。</p>
+
+<p><img src="https://d33wubrfki0l68.cloudfront.net/0b770b8c51b14b5b1eb4c73bbb523ea7cd0690d0/ddbec/images/why-you-should-use-a-go-module-proxy-1.jpg" alt="img" /></p>
+
+<h2 id="不-使用vendor-文件夹的问题">（不）使用vendor/文件夹的问题</h2>
+
+<p>如果使用<code>vendor/</code>文件夹，有以下缺点：</p>
+
+<ul>
+<li><code>vendor/</code>默认情况下，该<code>go</code>命令不再使用该文件夹（在<a href="https://golang.org/cmd/go/#hdr-Modules_and_vendoring"><em>模块感知</em></a>模式下）。如果你不使用<code>-mod=vendor</code>参数，它将不会发挥作用。这烦人的问题驱使其他hacky解决方案来支持Go的旧版本（请参阅：<a href="https://arslan.io/2018/08/26/using-go-modules-with-vendor-support-on-travis-ci/">在Travis CI中使用 go modules 并启用 vendor支持</a>）</li>
+<li><code>vendor/</code>文件夹，特别是对于大型项目，会占用大量空间。这增加了clone仓库所花费的时间。即使您认为clone仅执行一次，但大多数情况下并非如此。CI / CD系统通常会为每个触发器（例如“pull request”）clone仓库。因此，从长远来看，这将导致更长的build时间并影响团队中的每个人。</li>
+<li>添加新的依赖项通常会导致改变代码评审的*困难*程度。在大多数情况下，您必须将依赖项与实际的业务逻辑捆绑在一起，这使得难以进行改动。</li>
+</ul>
+
+<p>可能你想说，那我<strong>跳过vendor/</strong>文件夹不就没事了？这也无济于事，你必须解决以下问题：</p>
+
+<ul>
+<li><p><code>go</code>会尝试从原先的仓库下载依赖项。但是任何依赖关系都可能在哪天就消失了（<a href="https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/"><em>例如 left-pad包被删惨案</em></a>）。</p></li>
+
+<li><p>VCS可能已关闭（例如github.com）。在这种情况下，你的项目跑不起来了。</p></li>
+
+<li><p>有些公司不希望内部网络外部有任何传出连接。因此，删除 <code>vendor/</code>文件夹对他们来说是不行的。</p></li>
+
+<li><p>假设一个依赖项被发布为<code>v1.3.0</code>并且你<code>go get</code>拉取到本地缓存下来。然而，一旦依赖项的所有者通过推送具有同样 tag的恶意内容来破坏仓库，假如你的在一天没有拉取过缓存的赶紧的计算机上重新build的，那你这次就拉到了这个有恶意内容的版本。为了防止这种情况，您需要将<code>go.sum</code>文件与文件一起<code>go.mod</code>存储。</p></li>
+
+<li><p>有些依赖使用的是<code>git</code>之外的VCS，例如<code>hg</code>（Mercurial），<code>bzr</code>（Bazaar）或<code>svn</code>（Subversion）。并非所有这些工具都安装在你的电脑（或Dockerfile）上，这常常导致失败。</p></li>
+
+<li><p><code>go get</code>需要获取<code>go.mod</code>列出的每个依赖项的源代码以解决递归依赖项（这需要每个依赖项自己的<code>go.mod</code>文件）。这极大地减慢了整个构建过程的速度，因为这意味着它必须下载（例如<code>git clone</code>）每个存储库以<a href="https://about.sourcegraph.com/go/gophercon-2019-go-module-proxy-life-of-a-query">获取单个文件</a>。</p></li>
+</ul>
+
+<p>我们如何改善这种情况？</p>
+
+<h2 id="使用go模块代理的优点">使用Go模块代理的优点</h2>
+
+<p><img src="https://d33wubrfki0l68.cloudfront.net/5d86b7737a874531d6c6cb9088ba1f21d4f3d5b8/b4313/images/why-you-should-use-a-go-module-proxy-2.jpg" alt="img" /></p>
+
+<p>默认情况下，<code>go</code>命令直接从VCS下载模块。<code>GOPROXY</code>环境变量允许在下载源的进一步控制。设置这个环境变量，就会开启<code>go</code><strong>Go模块代理</strong>。</p>
+
+<p>通过将<code>GOPROXY</code>环境变量设置为Go模块代理，可以克服上面列出的所有缺点：</p>
+
+<ul>
+<li>默认情况下，Go模块代理是缓存和永久存储所有依赖项（在不可变存储中）。这意味着您不再需要使用任何<code>vendor/</code>文件夹。</li>
+<li>摆脱<code>vendor/</code>文件夹意味着您的项目将不会在存储库中占用空间。</li>
+<li>因为依赖项存储在不可变的存储中，所以即使依赖项从Internet上消失了，也可以免受影响。</li>
+<li>一旦将Go模块存储在Go代理中，就无法覆盖或删除它。这可以让我们的代码免受有人在相同版本上注入恶意代码的攻击。</li>
+<li>不再需要任何VSC工具来下载依赖项，因为依赖项是通过HTTP提供的（Go proxy在后台使用HTTP）。</li>
+<li>下载和构建Go模块的速度明显更快，因为Go代理通过HTTP单独提供了源代码（<code>.zip</code>存档）<code>go.mod</code>。与从VCS进行提取相比，这导致下载花费更少的时间和更快的时间（由于更少的开销）。解决依赖关系的速度也更快，因为<code>go.mod</code>可以独立获取（而之前必须获取整个存储库）。Go团队对其进行了测试，<a href="https://twitter.com/sajma/status/1155006281263923201?s=21">他们发现</a>在带宽高的网络环境下速度提高了3倍，带宽差的网络环境下速度提高了6倍！</li>
+<li>可以轻松地运行自己的Go代理，这可以让我们更好地控制构建pipeline的稳定性，因为不依赖版本库，可以防止VCS停机这种罕见情况。</li>
+</ul>
+
+<p>如你所见，使用Go模块代理简直完美。但是我们如何使用它呢？如果你不想维护自己的Go模块代理怎么办？让我们研究许多替代选择。</p>
+
+<h2 id="如何使用go模块代理">如何使用Go模块代理</h2>
+
+<p>要开始使用Go模块代理，我们需要将<code>GOPROXY</code>环境变量设置为兼容的<a href="https://golang.org/cmd/go/#hdr-Module_proxy_protocol">Go module proxy</a>。有多种方法：</p>
+
+<p><strong>1。）</strong>如果<code>GOPROXY</code>没有设置，空或设置为<code>direct</code>，<code>go get</code>会直接从VCS（例如github.com）的下载依赖：</p>
+
+<pre><code class="language-bash">GOPROXY=&quot;&quot;
+GOPROXY=direct
+</code></pre>
+
+<p>也可以将其设置为<code>off</code>，这表示不访问任何的网络。</p>
+
+<pre><code class="language-bash">GOPROXY=off
+</code></pre>
+
+<p><strong>2.）</strong>您可以开始使用公共Go代理。您的选择之一是使用Go小组（*由Google维护*）中的Go代理。可以在这里找到更多信息：<a href="https://proxy.golang.org/">https</a> : <a href="https://proxy.golang.org/">//proxy.golang.org/</a></p>
+
+<p>要开始使用它，您只需设置环境变量：</p>
+
+<pre><code class="language-bash">GOPROXY=https://proxy.golang.org
+</code></pre>
+
+<p>其他公共代理有：</p>
+
+<pre><code class="language-bash">GOPROXY=https://goproxy.io
+GOPROXY=https://goproxy.cn # proxy.golang.org 被墙了, 可以使用这个代替
+</code></pre>
+
+<p><strong>3.）</strong>也可以运行多个开源实现并自己托管。例如：</p>
+
+<ul>
+<li><code>Athens</code>：<a href="https://github.com/gomods/athens">https</a> : <a href="https://github.com/gomods/athens">//github.com/gomods/athens</a></li>
+<li><code>goproxy</code>：<a href="https://github.com/goproxy/goproxy">https</a>：<a href="https://github.com/goproxy/goproxy">//github.com/goproxy/goproxy</a></li>
+<li><code>THUMBAI</code>：<a href="https://thumbai.app/">https</a> : <a href="https://thumbai.app/">//thumbai.app/</a></li>
+</ul>
+
+<p>这需要自己来维护。但可自己决定这个代理是通过公共互联网还是只能内部网络访问。</p>
+
+<p><strong>4.）</strong>可以购买商业产品：</p>
+
+<ul>
+<li><code>Artifactory</code>：<a href="https://jfrog.com/artifactory/">https</a>：<a href="https://jfrog.com/artifactory/">//jfrog.com/artifactory/</a></li>
+</ul>
+
+<p><strong>5.）</strong>甚至可以传递一个<code>file:///</code>URL。由于Go模块代理是响应GET请求（没有查询参数）的Web服务器，因此任何文件系统中的文件夹也可以用作Go模块代理。</p>
+
+<h2 id="即将进行的go-v1-13更改-已经发布">即将进行的Go v1.13更改(已经发布)</h2>
+
+<p>Go v1.13版本中的Go proxy会有一些变化，我认为应该强调：</p>
+
+<ol>
+<li><p>在<code>GOPROXY</code>环境变量现在可以设置为逗号分隔的列表。在回退到下一个路径之前，它将尝试第一个代理。</p></li>
+
+<li><p>默认值<code>GOPROXY</code>会<code>https://proxy.golang.org,direct</code>。<code>direct</code> token后的所有内容都会被忽略。这也意味着<code>go get</code>现在将默认使用<code>GOPROXY</code>。如果根本不想使用Go代理，则需要将其设置为<code>off</code>。</p></li>
+
+<li><p>引入了一个新的环境变量<code>GOPRIVATE</code>，是一个逗号分隔的支持glob匹配规则的列表。这可用于绕过<code>GOPROXY</code>某些路径的代理，尤其是公司中的私有库（例如：）<code>GOPRIVATE=*.internal.company.com</code>。</p></li>
+</ol>
+
+<p>（白话翻译：GOPROXY设置例如<code>GOPROXY=https://goproxy.cn,direct</code>，意思是，首先尝试从<code>https://goproxy.cn</code>进行下载，如果没有，启用direct，即从仓库的的源地址下载，比如 githu.com/spf13/viper 这个路径，会使用<a href="https://githu.com/spf13/viper">https://githu.com/spf13/viper</a> 这个路径进行下载。<code>GOPRIVATE</code>变量相当于同时设置了<code>GONOPROXY</code>和<code>GONOSUMDB</code>，即对某个指定的私有仓库，直接从私有仓库拉取而不走github，而且不对模块进行校验）</p>
+
+<p>所有这些更改表明Go模块代理是Go模块的核心和重要部分。</p>
+
+<h2 id="结语">结语</h2>
+
+<p>同时使用<code>GOPROXY</code> 公共和专用的网络有很大的优势。这是一个很棒的功能，可以与<code>go</code>命令无缝配合。考虑到它具有许多优点（安全，快速，存储高效），明智的做法是在项目或组织中用起来。在<strong>Go v1.13中</strong>，会默认开启，这是个受欢迎的进步，它改进了Go中依赖管理的状态。</p>
+
+<hr />
+
+<p><a href="https://arslan.io/2019/08/02/why-you-should-use-a-go-module-proxy/">原文链接</a></p>
+
+<p><a href="https://segmentfault.com/a/1190000020293616">延伸阅读</a></p>
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/">使用go调用eth踩坑笔记</a></li>
+        
+        <li><a href="/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/">Raft 算法理解和总结</a></li>
+        
+        <li><a href="/about/">关于我</a></li>
+        
+        <li><a href="/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/">fabric 主要模块和概念介绍和详细交易流程</a></li>
+        
+        <li><a href="/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "sumbrilliance/sumbrilliance.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://summer4.dev">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/" title="(译)为什么要使用 Go 模块代理">(译)为什么要使用 Go 模块代理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" title="使用go调用eth踩坑笔记">使用go调用eth踩坑笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/" title="Raft 算法理解和总结">Raft 算法理解和总结</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/" title="fabric 主要模块和概念介绍和详细交易流程">fabric 主要模块和概念介绍和详细交易流程</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" title="使用 hugo 搭建github page 博客">使用 hugo 搭建github page 博客</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/" title="pem、 .p12、cer、pkcs 等文件的区别">pem、 .p12、cer、pkcs 等文件的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/" title="go 包管理">go 包管理</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" title="entitlements授权机制">entitlements授权机制</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" title="一次视频直播客户端逆向开发">一次视频直播客户端逆向开发</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://summer4.dev/categories/docker/">docker(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/ethereum/">ethereum(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/golang/">golang(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/hyperledger-fabric/">hyperledger-fabric(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/ios/">ios(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">以太坊(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链(3)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/">基础(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/">笔记(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/">记录(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://summer4.dev/categories/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/">踩坑笔记(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://summer4.dev/tags/beego/">beego</a>
+    
+    <a href="https://summer4.dev/tags/entitlements/">entitlements</a>
+    
+    <a href="https://summer4.dev/tags/ethereum/">ethereum</a>
+    
+    <a href="https://summer4.dev/tags/fabric-%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B/">fabric-记账流程</a>
+    
+    <a href="https://summer4.dev/tags/go/">go</a>
+    
+    <a href="https://summer4.dev/tags/ios/">ios</a>
+    
+    <a href="https://summer4.dev/tags/ios%E9%80%86%E5%90%91/">ios逆向</a>
+    
+    <a href="https://summer4.dev/tags/modules/">modules</a>
+    
+    <a href="https://summer4.dev/tags/nginx/">nginx</a>
+    
+    <a href="https://summer4.dev/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/">共识算法</a>
+    
+    <a href="https://summer4.dev/tags/%E5%85%B6%E4%BB%96/">其他</a>
+    
+    <a href="https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/">包管理</a>
+    
+    <a href="https://summer4.dev/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    
+    <a href="https://summer4.dev/tags/%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86/">学习整理</a>
+    
+    <a href="https://summer4.dev/tags/%E6%95%88%E7%8E%87/">效率</a>
+    
+    <a href="https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/">签名</a>
+    
+    <a href="https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/">证书</a>
+    
+    <a href="https://summer4.dev/tags/%E9%80%86%E5%90%91/">逆向</a>
+    
+    <a href="https://summer4.dev/tags/%E9%94%99%E8%AF%AF%E6%95%B4%E7%90%86/">错误整理</a>
+    
+    <a href="https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://summer4.dev/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://summer4.dev">夏四的博客 By 夏四</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138611423-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

@@ -3,12 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://summer4.dev/categories/</loc>
-    <lastmod>2019-05-18T16:42:00+08:00</lastmod>
+    <loc>https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2019-10-10T21:51:01+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://summer4.dev/categories/ethereum/</loc>
+    <loc>https://summer4.dev/posts/</loc>
+    <lastmod>2019-10-10T21:51:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/</loc>
+    <lastmod>2019-10-10T21:51:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://summer4.dev/categories/</loc>
     <lastmod>2019-05-18T16:42:00+08:00</lastmod>
   </url>
   
@@ -18,7 +28,7 @@
   </url>
   
   <url>
-    <loc>https://summer4.dev/posts/</loc>
+    <loc>https://summer4.dev/categories/ethereum/</loc>
     <lastmod>2019-05-18T16:42:00+08:00</lastmod>
   </url>
   
@@ -39,11 +49,6 @@
   
   <url>
     <loc>https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
-    <lastmod>2019-05-18T16:42:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://summer4.dev/</loc>
     <lastmod>2019-05-18T16:42:00+08:00</lastmod>
   </url>
   
@@ -193,12 +198,12 @@
   </url>
   
   <url>
-    <loc>https://summer4.dev/categories/ios/</loc>
+    <loc>https://summer4.dev/tags/ios/</loc>
     <lastmod>2017-04-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://summer4.dev/tags/ios/</loc>
+    <loc>https://summer4.dev/categories/ios/</loc>
     <lastmod>2017-04-18T00:00:00+00:00</lastmod>
   </url>
   

@@ -69,6 +69,28 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/" title="(译)为什么要使用 Go 模块代理" >(译)为什么要使用 Go 模块代理</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月10日
+                            </date>
+                            
+                            <div class="post-content">
+                                <p>引入Go模块之后，我以为这就是最终解决方案了。我很快意识到事实并非如此。最近，大家开始提倡使用Go模块代理。在研究了利弊之后，我得出结论，这是近年来<strong>最重要的变化</strong>之一。何处此言？是什么使Go模块代理如此特别？</p>
+
+<p>在Go模块中，如果你添加了新的依赖项或者在没有缓存过的新机器上构建Go模块，则它将（<code>go get</code>）下载<code>go.mod</code>中的所有依赖项，并将其缓存以用于进一步的操作。可以通过使用<code>vendor/</code>文件夹并编译时携带<code>-mod=vendor</code>参数来绕过缓存（以及下载依赖项）。</p>
+
+<p>但是这两种方法都不甚完美，我们有更好的方案。</p>……
+                            </div>
+                            <p class="readmore"><a href="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/">阅读全文</a></p>
+                        </article>
+                    
+                    
+		    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" title="使用go调用eth踩坑笔记" >使用go调用eth踩坑笔记</a>
                                 </h1>
                             </header>
@@ -306,33 +328,6 @@
                         </article>
                     
                     
-		    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" title="一次视频直播客户端逆向开发" >一次视频直播客户端逆向开发</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2016年5月1日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://summer4.dev/categories/ios">iOS</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                <p>本文原计划是一个系列中的首篇，结果懒癌一犯，无限跳票，但是毕竟是废了心血写的，此次迁移，也做了保留，如果能对有些朋友有所参考，那就再好不过。</p>
-
-<p>本文介绍的主要是逆向的第一步，对想要逆向的ipa文件砸壳（去掉外层的加密保护）。</p>……
-                            </div>
-                            <p class="readmore"><a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/">阅读全文</a></p>
-                        </article>
-                    
-                    
                     
 
 
@@ -377,6 +372,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/" title="(译)为什么要使用 Go 模块代理">(译)为什么要使用 Go 模块代理</a>
+    </li>
+    
+    <li>
         <a href="https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" title="使用go调用eth踩坑笔记">使用go调用eth踩坑笔记</a>
     </li>
     
@@ -410,10 +409,6 @@
     
     <li>
         <a href="https://summer4.dev/2016/05/%E4%B8%80%E6%AC%A1%E8%A7%86%E9%A2%91%E7%9B%B4%E6%92%AD%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/" title="一次视频直播客户端逆向开发">一次视频直播客户端逆向开发</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2016/05/%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E7%BA%BF%E7%9B%B4%E6%8E%A5ssh%E7%99%BB%E9%99%86%E5%88%B0ios%E8%AE%BE%E5%A4%87/" title="通过数据线直接ssh登陆到iOS设备">通过数据线直接ssh登陆到iOS设备</a>
     </li>
     
 </ul>
