@@ -1,24 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>其他 on 夏四的博客</title>
-    <link>https://summer4.dev/categories/%E5%85%B6%E4%BB%96/</link>
-    <description>Recent content in 其他 on 夏四的博客</description>
+    <title>其他 on 夏老四的博客</title>
+    <link>https://www.summer4.cn/categories/%E5%85%B6%E4%BB%96/</link>
+    <description>Recent content in 其他 on 夏老四的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <managingEditor>uyhhi1ss@gmail.com (夏四)</managingEditor>
-    <webMaster>uyhhi1ss@gmail.com (夏四)</webMaster>
-    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://summer4.dev/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <managingEditor>uyhhi1ss@gmail.com (夏老四)</managingEditor>
+    <webMaster>uyhhi1ss@gmail.com (夏老四)</webMaster>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://www.summer4.cn/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>密码学（一）--常用对称加密总结</title>
-      <link>https://summer4.dev/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/</link>
+      <link>https://www.summer4.cn/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0800</pubDate>
-      <author>uyhhi1ss@gmail.com (夏四)</author>
-      <guid>https://summer4.dev/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/</guid>
+      <author>uyhhi1ss@gmail.com (夏老四)</author>
+      <guid>https://www.summer4.cn/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/</guid>
       <description>&lt;p&gt;常用对称加密主要有：凯撒密码(凑数), DES, 3DES, AES，本文介绍了这几种常见的加密方式，并对相关概念(ECB,CBC,CFB,OFB,CTR进行了介绍)。&lt;/p&gt;</description>
     </item>
     

@@ -3,59 +3,63 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.58.3" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
-    <title>entitlements授权机制 | 夏四的博客</title>
-    <meta property="og:title" content="entitlements授权机制 - 夏四的博客">
+    <title>entitlements授权机制 | 夏老四的博客</title>
+    <meta property="og:title" content="entitlements授权机制 - 夏老四的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2017-04-18T00:00:00&#43;08:00">
+    <meta property="article:published_time" content='2017-04-18T00:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content="2017-04-18T00:00:00&#43;08:00">
+    <meta property="article:modified_time" content='2017-04-18T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="golang,杂谈,学习笔记,感悟,心得">
     <meta name="description" content="entitlements授权机制">
         <meta name="author" content="sumbrilliance">
         
-    <meta property="og:url" content="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <meta property="og:url" content="https://www.summer4.cn/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/">
+    <link rel="shortcut icon" href='/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='/favicon.png' type="image/png">
+    <link rel="alternate icon" href='/favicon.png' type="image/svg+xml">
     
 
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    
+    
+    
+    
     
     
 </head>
 
+
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://summer4.dev">
-                        夏四的博客
+                    <a id="logo" href="https://www.summer4.cn">
+                        夏老四的博客
                     </a>
                 
                 <p class="description">打杂开发/Go语言(golang)程序员</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://summer4.dev">首页</a>
+                    <a class="current" href="https://www.summer4.cn">Home</a>
                     
-                    <a  href="https://summer4.dev/archives/" title="归档">归档</a>
+                    <a  href="https://www.summer4.cn/archives/" title="归档">归档</a>
                     
-                    <a  href="https://summer4.dev/about/" title="关于">关于</a>
+                    <a  href="https://www.summer4.cn/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -63,150 +67,139 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">entitlements授权机制</h1>
+        </header>
+        
+  <time datetime="2017-04-18T00:00:00Z" class="post-meta meta-date dt-published">
+    2017-04-18
+  </time>
+
+
+<div class="post-meta meta-category">
+  <span>&nbsp;|</span>
+  
+    <a href='/categories/ios' target="_blank">iOS</a>
+  
+</div>
+
+
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">&nbsp;|
+                <span id="busuanzi_value_page_pv"></span> <span>reads</span>
+            </span>
+        </div>
         
         
-    <div class="container">
-        <div class="col-group">
-
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">entitlements授权机制</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2017年4月18日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="https://summer4.dev/categories/ios">iOS</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <p>在对ipa重签名的时候，你可能会疑惑，为什么可以用别的证书重签之后，ipa就可以安装，又为什么在重签的时候需要加入 embedded.mobileprovision 文件，重签失败出现的闪退又是为什么。那么也许你需要深入了解 entitlements 的验证机制。</p>
-
-<h2 id="一-entitlements-验证流程">一、entitlements 验证流程</h2>
-
-<h3 id="1-1-entitlements流程图">1.1 entitlements流程图</h3>
-
-<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-0.png" alt="流程图" />
+        <div class="post-content">
+            <p>在对ipa重签名的时候，你可能会疑惑，为什么可以用别的证书重签之后，ipa就可以安装，又为什么在重签的时候需要加入 embedded.mobileprovision 文件，重签失败出现的闪退又是为什么。那么也许你需要深入了解 entitlements 的验证机制。</p>
+<h2 id="一entitlements-验证流程">一、entitlements 验证流程</h2>
+<h3 id="11-entitlements流程图">1.1 entitlements流程图</h3>
+<p>
+        <img class="mx-auto" alt="流程图" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-0.png" />   
+    
 如图所示，entitlements.plist和pp文件都是entitlements这一授权机制的体现，两者彼此分工又互相配合。前者主管app在沙盒中的权限，而pp文件既管理沙盒权限，也管理允许运行的设备号，验证签名的证书是否有效等等。
-<img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-1.png" alt="启动验证流程" /></p>
 
-<h3 id="1-2-app的entitlements会在程序安装和启动时进行验证">1.2 app的entitlements会在程序安装和启动时进行验证</h3>
-
+        <img class="mx-auto" alt="启动验证流程" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-1.png" />   
+    </p>
+<h3 id="12-app的entitlements会在程序安装和启动时进行验证">1.2 app的entitlements会在程序安装和启动时进行验证</h3>
 <p>分为两步：</p>
-
 <p><strong>1.2.1 There are no unexpected or misconfigured entitlements</strong>
 检查格式对不对，以及有没有正确配置。</p>
-
 <p><strong>1.2.2 That entitlements match across the app’s signature and the app’s embedded provisioning profile.</strong>
 拿entitlements去检查app内部的signature文件和pp文件中的权限声明是否匹配。
 如果验证不通过，<strong>无法安装/启动</strong>。</p>
-
-<h2 id="二-查看entitlements的方法">二、查看entitlements的方法</h2>
-
-<h3 id="2-1-直接查看">2.1 直接查看</h3>
-
-<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-2.png" alt="常看entitlements文件" />
+<h2 id="二查看entitlements的方法">二、查看entitlements的方法</h2>
+<h3 id="21-直接查看">2.1 直接查看</h3>
+<p>
+        <img class="mx-auto" alt="常看entitlements文件" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-2.png" />   
+    
 但是这个entitlements文件所列的权限不全，有些不会列出来。比如application-identifier,keychain-access-groups这些。</p>
-
-<h3 id="2-2-打包时查看">2.2 打包时查看。</h3>
-
-<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-4.png" alt="Archive时查看entitlements" />
+<h3 id="22-打包时查看">2.2 打包时查看。</h3>
+<p>
+        <img class="mx-auto" alt="Archive时查看entitlements" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-4.png" />   
+    
 在这里可以看到我们将要打包的app的所有权限，我们可以检查是否有遗漏，比如说推送的权限，后台播放的权限。</p>
-
-<h3 id="2-3-codesign-命令行工具查看">2.3 codesign 命令行工具查看</h3>
-
+<h3 id="23-codesign-命令行工具查看">2.3 codesign 命令行工具查看</h3>
 <blockquote>
 <p>codesign -d &ndash;entitlements :- YourApp.app</p>
 </blockquote>
-
 <p>也可简写为</p>
-
 <blockquote>
 <p>codesign -d &ndash;ent :- /path/to/the.app</p>
 </blockquote>
-
-<h3 id="2-4-ldid-命令行工具查看">2.4 ldid 命令行工具查看</h3>
-
+<h3 id="24-ldid-命令行工具查看">2.4 ldid 命令行工具查看</h3>
 <blockquote>
 <p>ldid -e YourApp.app/YourApp</p>
 </blockquote>
-
-<h3 id="2-5-surcurity-命令行工具查看">2.5 surcurity 命令行工具查看</h3>
-
+<h3 id="25-surcurity-命令行工具查看">2.5 surcurity 命令行工具查看</h3>
 <blockquote>
 <p>security cms -D -i /path/XXXXX.mobileprovision</p>
 </blockquote>
-
-<h3 id="2-6-进到xxx-app里面-用vim打开里面的embedded-mobileprovision-文件-往下翻到entitlements目录">2.6 进到xxx.app里面，用vim打开里面的embedded.mobileprovision，文件，往下翻到entitlements目录</h3>
-
-<p><img src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-3.png" alt="mobileprovision中的entitlments示意" /></p>
-
-<h2 id="三-生成entitlements-plist文件">三、生成entitlements.plist文件</h2>
-
-<p>这里介绍一个技巧快速生成entitlements.plist文件，使用codesign工具：
-&gt; codesign -d &ndash;entitlements :entitlements.plist /path/from/XXX.app</p>
-
+<h3 id="26-进到xxxapp里面用vim打开里面的embeddedmobileprovision文件往下翻到entitlements目录">2.6 进到xxx.app里面，用vim打开里面的embedded.mobileprovision，文件，往下翻到entitlements目录</h3>
+<p>
+        <img class="mx-auto" alt="mobileprovision中的entitlments示意" src="https://blog-1252872972.cos.ap-chengdu.myqcloud.com/Entitlements-3.png" />   
+    </p>
+<h2 id="三生成entitlementsplist文件">三、生成entitlements.plist文件</h2>
+<p>这里介绍一个技巧快速生成entitlements.plist文件，使用codesign工具：</p>
+<blockquote>
+<p>codesign -d &ndash;entitlements :entitlements.plist /path/from/XXX.app</p>
+</blockquote>
 <p>会在当前文件夹生成和XXX.app权限一样的entitlements.plist文件</p>
-
-<h2 id="四-一些entitlements说明">四、一些entitlements说明</h2>
-
+<h2 id="四一些entitlements说明">四、一些entitlements说明</h2>
 <ul>
-<li><p>beta-reports-active
-Beta reports active is a key entitlement with no value. It exists on all App Store distribution provisioning profiles and determines that the app can be distributed through TestFlight.</p></li>
-
-<li><p>team-identifier
-Your Team ID, which is your team&rsquo;s unique 10-digit alpha/numeric value. This value is often used as the default App ID prefix. Certain features are only allowed across apps whose team-identifier value match, for example, Handoff, keychain and UIPasteboard sharing.</p></li>
-
-<li><p>get-task-allow
-The boolean value of get-task-allow determines whether Xcode&rsquo;s debugger can attach to the app.</p></li>
-
-<li><p>application-identifier
-The string value of application-identifier is of the format: <prefix>.<bundle_id> and it corresponds to your app&rsquo;s App ID. Often times the prefix is equal to the Team ID though it isn&rsquo;t always the case. In the provisioning profile, this value includes an asterisk if it is associated to a wildcard App ID. In either case, the application-identifier on an app&rsquo;s signature is always fully qualified to include the app&rsquo;s full bundle ID.</p></li>
-
-<li><p>keychain-access-groups
-This entitlement defines an array of strings corresponding to keychains you intend the app to have access to. Each string value in the array are of the format: <prefix>.<bundle_id>. By default, Xcode creates this entitlement for you a value equal to the application-identifier entitlement. All prefixes in this array of strings must match. For more information, see the SecItemAdd section of the Keychain Services Reference.</p></li>
-
-<li><p>push-notification
-The presence of this entitlement indicates that the app is enabled to receive push notifications. The value of this entitlement is either &ldquo;production&rdquo; or &ldquo;development&rdquo;, which refer to the live and sandbox push notification servers, respectively. For more information on troubleshooting push notifications.</p></li>
+<li>
+<p>beta-reports-active
+Beta reports active is a key entitlement with no value. It exists on all App Store distribution provisioning profiles and determines that the app can be distributed through TestFlight.</p>
+</li>
+<li>
+<p>team-identifier
+Your Team ID, which is your team&rsquo;s unique 10-digit alpha/numeric value. This value is often used as the default App ID prefix. Certain features are only allowed across apps whose team-identifier value match, for example, Handoff, keychain and UIPasteboard sharing.</p>
+</li>
+<li>
+<p>get-task-allow
+The boolean value of get-task-allow determines whether Xcode&rsquo;s debugger can attach to the app.</p>
+</li>
+<li>
+<p>application-identifier
+The string value of application-identifier is of the format: <!-- raw HTML omitted -->.&lt;bundle_id&gt; and it corresponds to your app&rsquo;s App ID. Often times the prefix is equal to the Team ID though it isn&rsquo;t always the case. In the provisioning profile, this value includes an asterisk if it is associated to a wildcard App ID. In either case, the application-identifier on an app&rsquo;s signature is always fully qualified to include the app&rsquo;s full bundle ID.</p>
+</li>
+<li>
+<p>keychain-access-groups
+This entitlement defines an array of strings corresponding to keychains you intend the app to have access to. Each string value in the array are of the format: <!-- raw HTML omitted -->.&lt;bundle_id&gt;. By default, Xcode creates this entitlement for you a value equal to the application-identifier entitlement. All prefixes in this array of strings must match. For more information, see the SecItemAdd section of the Keychain Services Reference.</p>
+</li>
+<li>
+<p>push-notification
+The presence of this entitlement indicates that the app is enabled to receive push notifications. The value of this entitlement is either &ldquo;production&rdquo; or &ldquo;development&rdquo;, which refer to the live and sandbox push notification servers, respectively. For more information on troubleshooting push notifications.</p>
+</li>
 </ul>
-
 <h2 id="一些注意的点">一些注意的点</h2>
-
 <p><strong>1.app上架会经过App Store的再次签名，所以embedded.mobileprovision文件只存在于你开发的时候那个.app中，从App Store下载下来的ipa里面的XXX.app中是没有这个文件的。</strong></p>
-
 <p><strong>2.越狱开发的时候，使用一些私有api，有些api是需要特殊的entitlements属性的，必须设置才能生效。</strong> 比如</p>
-
-<pre><code>&lt;key&gt;com.apple.locationd.authorizeapplications&lt;/key&gt;
+<pre tabindex="0"><code>&lt;key&gt;com.apple.locationd.authorizeapplications&lt;/key&gt;
 &lt;true/&gt;
 
-</code></pre>
-
-<p>是用来快速开关定位所依赖的entitlements，如果没有用此属性签名，定位开关的私有api将不会起效。
+</code></pre><p>是用来快速开关定位所依赖的entitlements，如果没有用此属性签名，定位开关的私有api将不会起效。
 而通常这些特殊entitlements是不公开的，所以用这些entitlements签名的app，将安装不上非越狱机(经本人测试确实不行，如果有其他黑魔法，可以让非越狱机使用这些依赖特殊entitlements的私有api，请告知笔者，谢谢！)</p>
-
 <p><a href="https://developer.apple.com/library/ios/technotes/tn2415/_index.html#//apple_ref/doc/uid/DTS40016427-CH1-OSVALIDATION">流程图出处</a>
 <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/TestingYouriOSApp/TestingYouriOSApp.html#//apple_ref/doc/uid/TP40012582-CH8-SW1">pp 验证流程图出处</a>
 <a href="http://objccn.io/issue-17-2/">代码签名探析</a></p>
-                        </div>
+        </div>
 
-                        
+        
 
 
-                        
+        
 
 <div class="post-archive">
     <h2>See Also</h2>
@@ -218,29 +211,29 @@ The presence of this entitlement indicates that the app is enabled to receive pu
         
         <li><a href="/2016/02/float-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">float 在内存中的表示</a></li>
         
-        <li><a href="/other/">归档</a></li>
-        
         <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/other/">归档</a></li>
         
     </ul>
 </div>
 
 
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="https://summer4.dev/tags/ios">iOS</a></li>
-                                
-                                <li><a href="https://summer4.dev/tags/%E7%AD%BE%E5%90%8D">签名</a></li>
-                                
-                                <li><a href="https://summer4.dev/tags/entitlements">entitlements</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/ios' target="_blank">iOS</a></li>
+                
+                <li><a href='/tags/%E7%AD%BE%E5%90%8D' target="_blank">签名</a></li>
+                
+                <li><a href='/tags/entitlements' target="_blank">entitlements</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
     
 
     
@@ -255,200 +248,34 @@ The presence of this entitlement indicates that the app is enabled to receive pu
       </script>
     </div>
     
-                </div>
-            </div>
-            <div id="secondary">
-    <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://summer4.dev">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
     
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://summer4.dev/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/" title="(译)为什么要使用 Go 模块代理">(译)为什么要使用 Go 模块代理</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" title="使用go调用eth踩坑笔记">使用go调用eth踩坑笔记</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/" title="密码学（一）--常用对称加密总结">密码学（一）--常用对称加密总结</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/" title="Raft 算法理解和总结">Raft 算法理解和总结</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/" title="fabric 主要模块和概念介绍和详细交易流程">fabric 主要模块和概念介绍和详细交易流程</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" title="使用 hugo 搭建github page 博客">使用 hugo 搭建github page 博客</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/" title="pem、 .p12、cer、pkcs 等文件的区别">pem、 .p12、cer、pkcs 等文件的区别</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/" title="go 包管理">go 包管理</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" title="entitlements授权机制">entitlements授权机制</a>
-    </li>
-    
-</ul>
-    </section>
-
     
 
-    <section class="widget">
-        <h3 class="widget-title">分类</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://summer4.dev/categories/docker/">docker(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/ethereum/">ethereum(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/golang/">golang(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/hyperledger-fabric/">hyperledger-fabric(2)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/ios/">ios(3)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">以太坊(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E5%85%B6%E4%BB%96/">其他(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链(3)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E5%9F%BA%E7%A1%80/">基础(2)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E7%AC%94%E8%AE%B0/">笔记(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E8%AE%B0%E5%BD%95/">记录(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://summer4.dev/categories/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/">踩坑笔记(1)</a>
-    </li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title">标签</h3>
-<div class="tagcloud">
-    
-    <a href="https://summer4.dev/tags/beego/">beego</a>
-    
-    <a href="https://summer4.dev/tags/entitlements/">entitlements</a>
-    
-    <a href="https://summer4.dev/tags/ethereum/">ethereum</a>
-    
-    <a href="https://summer4.dev/tags/fabric-%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B/">fabric-记账流程</a>
-    
-    <a href="https://summer4.dev/tags/go/">go</a>
-    
-    <a href="https://summer4.dev/tags/ios/">ios</a>
-    
-    <a href="https://summer4.dev/tags/ios%E9%80%86%E5%90%91/">ios逆向</a>
-    
-    <a href="https://summer4.dev/tags/modules/">modules</a>
-    
-    <a href="https://summer4.dev/tags/nginx/">nginx</a>
-    
-    <a href="https://summer4.dev/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/">共识算法</a>
-    
-    <a href="https://summer4.dev/tags/%E5%85%B6%E4%BB%96/">其他</a>
-    
-    <a href="https://summer4.dev/tags/%E5%8C%85%E7%AE%A1%E7%90%86/">包管理</a>
-    
-    <a href="https://summer4.dev/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
-    
-    <a href="https://summer4.dev/tags/%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86/">学习整理</a>
-    
-    <a href="https://summer4.dev/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
-    
-    <a href="https://summer4.dev/tags/%E6%95%88%E7%8E%87/">效率</a>
-    
-    <a href="https://summer4.dev/tags/%E7%AD%BE%E5%90%8D/">签名</a>
-    
-    <a href="https://summer4.dev/tags/%E8%AF%81%E4%B9%A6/">证书</a>
-    
-    <a href="https://summer4.dev/tags/%E9%80%86%E5%90%91/">逆向</a>
-    
-    <a href="https://summer4.dev/tags/%E9%94%99%E8%AF%AF%E6%95%B4%E7%90%86/">错误整理</a>
-    
-    <a href="https://summer4.dev/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
-    
 </div>
-    </section>
 
-    
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://summer4.dev/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-        </div>
-    </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="https://summer4.dev">夏四的博客 By 夏四</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+                    <footer id="footer">
+    <div>
+        &copy; 2026 <a href="https://www.summer4.cn">夏老四的博客 By </a>
         
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
     </div>
 </footer>
 
 
     
+    
     <script type="text/javascript">
-        
-        (function () {
-            $("pre code").parent().addClass("line-numbers")
-        }());
-
         window.MathJax = {
             tex2jax: {
                 inlineMath: [['$', '$']],
@@ -456,24 +283,100 @@ The presence of this entitlement indicates that the app is enabled to receive pu
                 }
             };
     </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
 
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	ga('create', 'UA-138611423-1', 'auto');
 	
 	ga('send', 'pageview');
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
+
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 
 
     <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
@@ -481,5 +384,159 @@ if (!doNotTrack) {
 
 
 
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://www.summer4.cn">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">Latest articles</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/10/%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-go-%E6%A8%A1%E5%9D%97%E4%BB%A3%E7%90%86/" title="(译)为什么要使用 Go 模块代理" target="_blank">(译)为什么要使用 Go 模块代理</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/05/%E4%BD%BF%E7%94%A8go%E8%B0%83%E7%94%A8eth%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" title="使用go调用eth踩坑笔记" target="_blank">使用go调用eth踩坑笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%80-%E5%B8%B8%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93/" title="密码学（一）--常用对称加密总结" target="_blank">密码学（一）--常用对称加密总结</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/04/raft-%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3%E5%92%8C%E6%80%BB%E7%BB%93/" title="Raft 算法理解和总结" target="_blank">Raft 算法理解和总结</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/04/fabric-%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%9D%97%E5%92%8C%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B/" title="fabric 主要模块和概念介绍和详细交易流程" target="_blank">fabric 主要模块和概念介绍和详细交易流程</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/03/docker%E5%A4%9A%E5%AE%B9%E5%99%A8%E5%AE%9E%E8%B7%B5nginx-go-beego%E9%95%9C%E5%83%8F%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理" target="_blank">docker多容器实践：nginx&#43;go&#43;beego镜像做反向代理</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2019/01/%E4%BD%BF%E7%94%A8-hugo-%E6%90%AD%E5%BB%BAgithub-page-%E5%8D%9A%E5%AE%A2/" title="使用 hugo 搭建github page 博客" target="_blank">使用 hugo 搭建github page 博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2018/12/pem-.p12cerpkcs-%E7%AD%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/" title="pem、 .p12、cer、pkcs 等文件的区别" target="_blank">pem、 .p12、cer、pkcs 等文件的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2018/10/go-%E5%8C%85%E7%AE%A1%E7%90%86/" title="go 包管理" target="_blank">go 包管理</a>
+    </li>
+    
+    <li>
+        <a href="https://www.summer4.cn/2017/04/entitlements%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6/" title="entitlements授权机制" target="_blank">entitlements授权机制</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>Categories</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://www.summer4.cn/categories/docker/">docker (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/ethereum/">ethereum (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/golang/">golang (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/hyperledger-fabric/">Hyperledger-fabric (2)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/ios/">iOS (3)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">以太坊 (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E5%85%B6%E4%BB%96/">其他 (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链 (3)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E5%9F%BA%E7%A1%80/">基础 (2)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E7%AC%94%E8%AE%B0/">笔记 (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E8%AE%B0%E5%BD%95/">记录 (1)</a></li>
+    
+    <li><a href="https://www.summer4.cn/categories/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/">踩坑笔记 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>Tags</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://www.summer4.cn/tags/beego/">beego</a>
+    
+    <a href="https://www.summer4.cn/tags/entitlements/">entitlements</a>
+    
+    <a href="https://www.summer4.cn/tags/ethereum/">ethereum</a>
+    
+    <a href="https://www.summer4.cn/tags/fabric-%E8%AE%B0%E8%B4%A6%E6%B5%81%E7%A8%8B/">fabric 记账流程</a>
+    
+    <a href="https://www.summer4.cn/tags/go/">go</a>
+    
+    <a href="https://www.summer4.cn/tags/ios/">iOS</a>
+    
+    <a href="https://www.summer4.cn/tags/ios%E9%80%86%E5%90%91/">iOS逆向</a>
+    
+    <a href="https://www.summer4.cn/tags/modules/">modules</a>
+    
+    <a href="https://www.summer4.cn/tags/nginx/">nginx</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/">共识算法</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%85%B6%E4%BB%96/">其他</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%8C%85%E7%AE%A1%E7%90%86/">包管理</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86/">学习整理</a>
+    
+    <a href="https://www.summer4.cn/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://www.summer4.cn/tags/%E6%95%88%E7%8E%87/">效率</a>
+    
+    <a href="https://www.summer4.cn/tags/%E7%AD%BE%E5%90%8D/">签名</a>
+    
+    <a href="https://www.summer4.cn/tags/%E8%AF%81%E4%B9%A6/">证书</a>
+    
+    <a href="https://www.summer4.cn/tags/%E9%80%86%E5%90%91/">逆向</a>
+    
+    <a href="https://www.summer4.cn/tags/%E9%94%99%E8%AF%AF%E6%95%B4%E7%90%86/">错误整理</a>
+    
+    <a href="https://www.summer4.cn/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">Meta</h3>
+        <ul class="widget-list">
+            <li><a href="https://www.summer4.cn/index.xml">RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
